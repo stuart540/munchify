@@ -1,7 +1,16 @@
+*{
+    color: #22333b;
+}
+
 #landingJumbotron{
     display: grid;
     place-items: center;
     justify-content: center;
+    background-color: #b9fbc0;
+}
+
+#randomiseButton{
+    background-color: #b9fbc0;
 }
 
 .col{
