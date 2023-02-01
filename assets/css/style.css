@@ -1,0 +1,12 @@
+#landingJumbotron{
+    display: grid;
+    place-items: center;
+    justify-content: center;
+}
+
+.col{
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 25px;
+}
