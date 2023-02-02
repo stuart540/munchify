@@ -1,0 +1,25 @@
+*{
+    color: #22333b;
+}
+
+#landingJumbotron{
+    display: grid;
+    place-items: center;
+    justify-content: center;
+    background-color: #b9fbc0;
+}
+
+#randomiseButton{
+    background-color: #b9fbc0;
+}
+
+.col{
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 25px;
+}
+
+.hide{
+    display: none;
+}
