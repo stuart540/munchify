@@ -10,7 +10,6 @@ Application to generate a playlist from Spotify, alongside a recipe for a cuisin
 - Simple UI features to clearly layout functionality for the user to use
 - Local storage to save user history
 
-
 ## Usage
 When you are feeling indecisive or unknowledgeable about cooking a certain food/cuisine, use our application to look for recipes based on your input with a playlist to go with the theme.
 
