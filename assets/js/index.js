@@ -85,19 +85,31 @@ if(favouriteRecipeButton.attr(data-saved) === false)
     
     
     // Adding the recipe into local storage using the ID from spoonacular as the name.
-    // Using the spoonacular ID gives us a unique ID for each recipe so we can easily check if it already exists 
+    // Using the spoonacular ID gives us a unique ID for each recipe so we can easily check if it already exists
+    // Add "recipeID_" to the start of each key so if we store anything else in local storage we can seperate out recipes
     // Define currentRecipe as a global variable elsewhere. It should be an object matching the structure of the fullRecipe object in getRecipes()
     var savingRecipe = JSON.stringify(currentRecipe);
-    localStorage.setItem(currentRecipe.recipeID, savingRecipe);
+    localStorage.setItem(("recipeID_"+currentRecipe.recipeID), savingRecipe);
 }
 else
 {
     favouriteRecipeButton.attr(data-saved, true);
-    localStorage.removeItem(currentRecipe.recipeID);
+    localStorage.removeItem(("recipeID_"+currentRecipe.recipeID));
 
     // Need to add a line here to update styling/text content on button to show the recipe is not saved
 }
+});
+
+function savedRecipeCardsRender(){
+    
+    // Retrieve all items from local storage and place into arrays
+
+    var keys = Object.keys(localStorage);
+    var values = Object.values(localStorage);
+    
+    
+
 
 }
-)
+
 });
