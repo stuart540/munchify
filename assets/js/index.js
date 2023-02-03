@@ -1,7 +1,7 @@
 $(document).ready(function(){
 
 var cuisinesList = [
-    
+    ""
 ]
 
 var recipeContainer = $("#recipeContainer");
@@ -9,9 +9,12 @@ var landingContainer = $("#landingContainer");
 
 var randomiseButton = $("#randomiseButton");
 
+
+var favouritesContainer = $("#favourites");
+
+// Recipe elements
 var recipeHeader = $("#recipeHeader");
 var recipeImg = $("#recipePhoto");
-
 var recipeIngred = $("#recipeIngred");
 var recipeInstruct = $("#recipeInst");
 
