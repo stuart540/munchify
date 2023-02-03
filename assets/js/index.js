@@ -1,9 +1,20 @@
+$(document).ready(function(){
+
 var cuisinesList = [
     
 ]
 
+var recipeContainer = $("#recipeContainer");
+var landingContainer = $("#landingContainer");
 
-getRecipes("italian")
+var randomiseButton = $("#randomiseButton");
+
+var recipeHeader = $("#recipeHeader");
+var recipeImg = $("#recipePhoto");
+
+var recipeIngred = $("#recipeIngred");
+var recipeInstruct = $("#recipeInst");
+
 
 function getRecipes(cuisine){
     var queryURL = "https://api.spoonacular.com/recipes/random?apiKey=ad7eae9455534c2b9df85e498cdf804b&number=1&tags=dinner,main dish,"+cuisine
@@ -13,11 +24,17 @@ function getRecipes(cuisine){
   })
     .then(function(response) {
 
-        var ingredients = []
+        console.log(response);
+
+
+        var ingredients = [];
         response.recipes[0].extendedIngredients.forEach(element => {
-            ingredients.push(element.original)
+            ingredients.push(element.original);
+        
+
         });
 
+        console.log("Ingredients: "+ingredients);
 
         var fullRecipe = {
             recipeName : response.recipes[0].title,
@@ -26,11 +43,32 @@ function getRecipes(cuisine){
             recipeInstructions : response.recipes[0].instructions,
             recipeURL : response.recipes[0].sourceUrl,
         }
-        output = JSON.stringify(fullRecipe)
-        return(fullRecipe)
+
+
+        
+        // Update header to recipe name
+        recipeHeader.text(fullRecipe.recipeName);
+
+        // Update image to recipe image
+        recipeImg.attr("src",fullRecipe.recipeImageURL);
+
+        recipeIngred.text(fullRecipe.recipeIngredients);
+        recipeInstruct.text(fullRecipe.recipeInstructions);
+
+
+
     });
 }
 
 
+// Function to hide 
+var hideLanding = function () {
+    recipeContainer.removeClass("hide");
+    landingContainer.addClass("hide");
+    getRecipes("italian");
+}
+
+randomiseButton.on("click",hideLanding);
 
 
+});

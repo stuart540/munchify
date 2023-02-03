@@ -7,6 +7,8 @@
     place-items: center;
     justify-content: center;
     background-color: #b9fbc0;
+    padding-top: 0;
+    padding-bottom: 0;
 }
 
 #randomiseButton{
@@ -22,4 +24,18 @@
 
 .hide{
     display: none;
+}
+
+#headerRow{
+    display: grid;
+    align-items: center;
+    justify-content: center;
+}
+
+.navbar{
+    background-color: #e9edc9;
+}
+
+#munchify_logo{
+    height: 200px;
 }
