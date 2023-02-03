@@ -1,7 +1,7 @@
 $(document).ready(function(){
 
 var cuisinesList = [
-    
+    ""
 ]
 
 var recipeContainer = $("#recipeContainer");
@@ -11,9 +11,12 @@ var randomiseButton = $("#randomiseButton");
 var favouriteRecipeButton = $("#favouriteRecipe");
 
 
+
+var favouritesContainer = $("#favourites");
+
+// Recipe elements
 var recipeHeader = $("#recipeHeader");
 var recipeImg = $("#recipePhoto");
-
 var recipeIngred = $("#recipeIngred");
 var recipeInstruct = $("#recipeInst");
 
@@ -36,7 +39,6 @@ function getRecipes(cuisine){
 
         });
 
-        console.log("Ingredients: "+ingredients);
 
         var fullRecipe = {
             recipeName : response.recipes[0].title,
@@ -47,7 +49,7 @@ function getRecipes(cuisine){
             recipeID : response.recipes[0].id
         }
 
-
+        console.log(fullRecipe);
         
         // Update header to recipe name
         recipeHeader.text(fullRecipe.recipeName);
@@ -56,7 +58,6 @@ function getRecipes(cuisine){
         recipeImg.attr("src",fullRecipe.recipeImageURL);
 
         recipeIngred.text(fullRecipe.recipeIngredients);
-        recipeInstruct.text(fullRecipe.recipeInstructions);
 
 
 
