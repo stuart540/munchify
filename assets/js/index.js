@@ -103,13 +103,49 @@ else
 function savedRecipeCardsRender(){
     
     // Retrieve all items from local storage and place into arrays
-
     var keys = Object.keys(localStorage);
     var values = Object.values(localStorage);
+    // Remove any elements in the arrays that are not saved recipes    
+    for (i in keys){
+        if(keys[i].startsWith("recipeID_")){}
+        else
+        {keys.splice(i,1);
+         values.splice(i,1);           
+        }
+    }    
+    // Pick 3 elements indexs in recipe list to display. Or if 3 or less just pick what we have
+    var selectedRecipes = []
+    if (keys.length < 4){
+        switch(keys.length) {
+            case 1:
+              selectedRecipes = [0]
+              break;
+            case 2:
+              selectedRecipes = [1,0]
+              break;
+            case 3:
+              selectedRecipes = [2,1,0]
+          }
+    } else {
+        selectedRecipes = generateRandomNumbers(3,keys.length)
+    }
     
-    
+
+
 
 
 }
+
+// Function for picking n unique random numbers out of a list up to a max number
+function generateRandomNumbers(n,max) {
+    let uniqueNumbers = [];
+    while (uniqueNumbers.length < n) {
+      let randomNumber = Math.floor((Math.random() * max) + 0);
+      if (!uniqueNumbers.includes(randomNumber)) {
+        uniqueNumbers.push(randomNumber);
+      }
+    }
+    return uniqueNumbers;
+  }
 
 });
