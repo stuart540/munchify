@@ -19,7 +19,11 @@
     display: grid;
     justify-content: center;
     align-items: center;
-    padding-bottom: 25px;
+    padding-bottom: 15px;
+}
+
+.row{
+    padding-bottom: 15px;
 }
 
 .hide{
