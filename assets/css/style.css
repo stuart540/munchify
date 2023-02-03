@@ -7,6 +7,8 @@
     place-items: center;
     justify-content: center;
     background-color: #b9fbc0;
+    padding-top: 0;
+    padding-bottom: 0;
 }
 
 #randomiseButton{
