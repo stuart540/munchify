@@ -24,6 +24,12 @@
     display: none;
 }
 
+#headerRow{
+    display: grid;
+    align-items: center;
+    justify-content: center;
+}
+
 .navbar{
     background-color: #e9edc9;
 }
