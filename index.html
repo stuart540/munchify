@@ -55,7 +55,7 @@
   <!-- containers showing recipe and spotify playlist -->
   <div class="container-fluid hide" id="recipeContainer">
     <div class="row">
-      <div class="col">
+      <div id="recipeSection" data-recipevar="currentRecipe" class="col">
   <!-- Dynamically update recipe header -->
         <div class="h2" id="recipeHeader">
         Recipe Placeholder
@@ -63,8 +63,9 @@
         <img src="" alt="Recipe Photo" id="recipePhoto" placeholder="test">
         <div class="recipeIngred"> ingredients </div>
         <p class="recipeInst"> recipe </p>
+        <button type="button" class="btn btn-lg" data-saved="false" id="favouriteButton">Add to favourites</button>
       </div>
-    <div class="col">
+    <div id="playlistSection" class="col">
   <!-- Dynamically update recipe header -->
         <div class="h2" id="recipeHeader">
         Playlist Placeholder
@@ -99,29 +100,29 @@
     </div>
     <div class="row">
       <div class="card-deck">
-        <div class="card">
-          <img class="card-img-top" src="..." alt="Card image cap">
-          <div class="card-body">
-            <h5 class="card-title">Bolognese + Italian Bangers</h5>
-            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
+        <div id="recipeCard0" data-recipevar="recipeCard0" class="card hide">
+          <img class="card-img-top" src="" alt="">
+          <div class="card-body hide">
+            <h5 class="card-title"></h5>
+            <p class="card-text"></p>
 
            
           </div>
         </div>
-        <div class="card">
-          <img class="card-img-top" src="..." alt="Card image cap">
-          <div class="card-body">
-            <h5 class="card-title">Curry + Indian Selection</h5>
-            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
+        <div id="recipeCard1" data-recipevar="recipeCard1" class="card hide">
+          <img class="card-img-top" src="" alt="">
+          <div class="card-body hide">
+            <h5 class="card-title"></h5>
+            <p class="card-text"></p>
 
            
           </div>
         </div>
-        <div class="card">
-          <img class="card-img-top" src="..." alt="Card image cap">
-          <div class="card-body">
-            <h5 class="card-title">Fish & Chips + British Basics</h5>
-            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
+        <div id="recipeCard2" data-recipevar="recipeCard2" class="card hide">
+          <img class="card-img-top" src="" alt="">
+          <div class="card-body hide">
+            <h5 class="card-title"></h5>
+            <p class="card-text"></p>
           </div>
         </div>
       </div>
@@ -129,42 +130,7 @@
   </div>
 </div>
 
-<div class="container">
-  <div class="row">
-    <div class="col">
-      <h2 id="favourite">Favourite:</h1>
-    </div>
-  </div>
-  <div class="row">
-    <div class="card-deck">
-      <div class="card">
-        <img class="card-img-top" src="..." alt="Card image cap">
-        <div class="card-body">
-          <h5 class="card-title">Bolognese + Italian Bangers</h5>
-          <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
 
-         
-        </div>
-      </div>
-      <div class="card">
-        <img class="card-img-top" src="..." alt="Card image cap">
-        <div class="card-body">
-          <h5 class="card-title">Curry + Indian Selection</h5>
-          <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
-
-         
-        </div>
-      </div>
-      <div class="card">
-        <img class="card-img-top" src="..." alt="Card image cap">
-        <div class="card-body">
-          <h5 class="card-title">Fish & Chips + British Basics</h5>
-          <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
 </div>
 
 
