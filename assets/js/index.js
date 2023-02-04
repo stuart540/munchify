@@ -69,22 +69,24 @@ function getRecipes(cuisine){
 var hideLanding = function () {
     recipeContainer.removeClass("hide");
     landingContainer.addClass("hide");
+    
     getRecipes("italian");
 }
 
 randomiseButton.on("click",hideLanding);
 
-
+// I'm going to change this around so we can call it as a function when the button is pressed on any recipe - not just on the current one.
 // Save current recipe to local storage when favourite button is clicked. Or, remove from local storage if clicked again.
 // When we initially generate the favourites button we need to check whether the recipe ID is already present in local storage. Then, set the data-saved attribute to true if it is or false if not
 
-favouriteRecipeButton.on('click', function(){
+// Pass in the attributes of the recipe
+function favouriteRecipeButton(){
 if(favouriteRecipeButton.attr(data-saved) === false)
 {
     favouriteRecipeButton.attr(data-saved, true) 
-    // Need to add a line here to update styling/text content on button to show the recipe is saved
-    
-    
+    // Need to add a line here to update styling/text content on button to show the recipe is saved    
+    // --------
+
     // Adding the recipe into local storage using the ID from spoonacular as the name.
     // Using the spoonacular ID gives us a unique ID for each recipe so we can easily check if it already exists
     // Add "recipeID_" to the start of each key so if we store anything else in local storage we can seperate out recipes
@@ -98,10 +100,11 @@ else
     localStorage.removeItem(("recipeID_"+currentRecipe.recipeID));
 
     // Need to add a line here to update styling/text content on button to show the recipe is not saved
+    // ---------
 }
-});
+};
 
-function savedRecipeCardsRender(){
+function retrievePreviousRecipes(){
     
     // Retrieve all items from local storage and place into arrays
     var keys = Object.keys(localStorage);
@@ -114,7 +117,7 @@ function savedRecipeCardsRender(){
          values.splice(i,1);           
         }
     }    
-    // Pick 3 elements indexs in recipe list to display. Or if 3 or less just pick what we have
+    // Pick 3 elements indexs in recipe list to display. Or if less than 4 just pick what we have
     var selectedRecipes = []
     if (keys.length < 4){
         switch(keys.length) {
@@ -131,14 +134,18 @@ function savedRecipeCardsRender(){
         selectedRecipes = generateRandomNumbers(3,keys.length)
     }
     
-
+    
+    // Generate cards for each of the recipes we've picked and append to page
+    selectedRecipes.forEach(element => {
+        
+    });
 
 
 
 }
 
 // Function for picking n unique random numbers out of a list up to a max number
-function generateRandomNumbers(n,max) {
+function generateRandomNumbers(n,max){
     let uniqueNumbers = [];
     while (uniqueNumbers.length < n) {
       let randomNumber = Math.floor((Math.random() * max) + 0);
@@ -147,6 +154,18 @@ function generateRandomNumbers(n,max) {
       }
     }
     return uniqueNumbers;
-  }
+    }
+
+
+
+// Function to generate a bootstrap card from recipe object passed in and append to specified html element
+
+function savedRecipeCardsRender(recipe,htmlEl){
+
+
+
+
+
+}
 
 });
