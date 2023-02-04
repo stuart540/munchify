@@ -13,6 +13,7 @@ var favouriteRecipeButton = $("#favouriteRecipe");
 
 
 var favouritesContainer = $("#favourites");
+var playlistImg = $("playlistPhoto")
 
 // Recipe elements
 var recipeHeader = $("#recipeHeader");
@@ -20,6 +21,8 @@ var recipeImg = $("#recipePhoto");
 var recipeIngred = $("#recipeIngred");
 var recipeInstruct = $("#recipeInst");
 
+// Playlist elements
+var playlistImg = $("playlistPhoto")
 
 function getRecipes(cuisine){
     var queryURL = "https://api.spoonacular.com/recipes/random?apiKey=ad7eae9455534c2b9df85e498cdf804b&number=1&tags=dinner,main dish,"+cuisine
@@ -56,9 +59,13 @@ function getRecipes(cuisine){
 
         // Update image to recipe image
         recipeImg.attr("src",fullRecipe.recipeImageURL);
+        // Adjust recipe image position
+        recipeImg.attr("class","mx-auto")
 
         recipeIngred.text(fullRecipe.recipeIngredients);
 
+        // Adjust Playlist Image position
+        playlistImg.attr("class","mx-auto")
 
 
     });

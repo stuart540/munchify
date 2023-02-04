@@ -11,6 +11,18 @@
     padding-bottom: 0;
 }
 
+#jumbo1 {
+    font-family: "Oswald";
+    font-size: 30px;
+    color: #74c69d;
+}
+
+#jumbo2 {
+    font-family: "Quattrocento";
+    font-size: 20px;
+    color: #95d5b2;
+}
+
 #randomiseButton{
     background-color: #b9fbc0;
 }
