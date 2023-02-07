@@ -15,7 +15,7 @@ var recipeCard0 = {}
 var recipeCard1 = {}
 var recipeCard2 = {}
 
-var currentRecipeFavouriteButton = $("#currentFavouriteButton");
+var currentRecipeFavouriteButton = $("#favouriteButton");
 var favouritesContainer = $("#favourites");
 var playlistImg = $("playlistPhoto")
 
@@ -30,7 +30,7 @@ var playlistImg = $("playlistPhoto")
 
 
 function getRecipes(cuisine){
-    var queryURL = "https://api.spoonacular.com/recipes/random?apiKey=ad7eae9455534c2b9df85e498cdf804b&number=1&tags=dinner,main dish,"+cuisine
+    var queryURL = "https://api.spoonacular.com/recipes/random?apiKey=f14cec32cf4e47acbb3dd6e49f5de686&number=1&tags=dinner,main dish,"+cuisine
     $.ajax({
     url: queryURL,
     method: "GET"
@@ -63,9 +63,24 @@ function getRecipes(cuisine){
 
 
 function recipeRender(recipe){
+    recipeContainer.removeClass("hide");
+    landingContainer.addClass("hide");
 
+    console.log(recipe)
      // Set current recipe button ID
      currentRecipeFavouriteButton.attr("data-ID",recipe.recipeID)
+
+     // Check if recipe is in local storage and set data-saved attribute and favourite text accordingly
+
+     if(localStorage.getItem("recipeID_"+recipe.recipeID) === null){
+        currentRecipeFavouriteButton.attr("data-saved","false")
+        currentRecipeFavouriteButton.text("Add to favourites")
+     }
+     else
+     {
+        currentRecipeFavouriteButton.attr("data-saved", "true")
+        currentRecipeFavouriteButton.text("Remove from favourites") 
+     }
 
      // Update header to recipe name
      recipeHeader.text(recipe.recipeName);
@@ -134,7 +149,7 @@ submitButton.on("click",function(){
     // Get the value chosen in the form
     var chosenCuisine = $("#selectForm").val();
     // Load the photo 
-    displayData(chosenCuisine);
+    getRecipes(chosenCuisine);
 })
 
 currentRecipeFavouriteButton.on('click', function () {
@@ -277,20 +292,43 @@ function recipeCardRender(recipe,htmlEl){
     var cardImg = $('<img>');
     var cardBody = $('<div>');
     var cardh5 = $('<h5>');
+    var cardButton = $('<div>');
     
     card.addClass("card");
     cardImg.addClass("card-img-top");
     cardBody.addClass("card-body");
     cardh5.addClass("card-title");
+    cardButton.addClass("card-block stretched-link text-decoration-none")
     
     cardImg.attr("src",recipe.recipeImageURL);
     cardh5.text(recipe.recipeName);
+    cardButton.attr("data-ID",recipe.recipeID)
 
     cardBody.append(cardh5);
     cardBody.attr("style","background-color:#b9fbc0;");
     card.append(cardImg);
     card.append(cardBody);
+    cardh5.append(cardButton);
     htmlEl.append(card);
+
+
+
+    cardButton.on('click', function () {
+        console.log("run function")
+        var recipeID = cardButton.attr("data-ID")
+        if(localStorage.getItem("recipeID_"+recipeID) === null){
+            var recipe = tempRecipes.find(obj => {
+                return obj.recipeID === parseInt(recipeID)
+                })
+         }
+         else
+         {
+            var recipe = JSON.parse(localStorage.getItem("recipeID_"+recipeID))
+         }
+         console.log(recipe)
+        recipeRender(recipe)
+      });
+
 
 }
 
