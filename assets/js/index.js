@@ -53,63 +53,71 @@ function getRecipes(cuisine){
 
         // Add fullRecipe to the tempRecipes array where we hold the recipes we're dealing with in this session
         tempRecipes.push(fullRecipe);
-        console.log(tempRecipes)
 
-        // Set current recipe button ID
-        currentRecipeFavouriteButton.attr("data-ID",fullRecipe.recipeID)
-
-        // Update header to recipe name
-        recipeHeader.text(fullRecipe.recipeName);
-
-        // Update image to recipe image
-        recipeImg.attr("src",fullRecipe.recipeImageURL);
-
-        
-        // Adjust recipe image position
-        recipeImg.attr("class","mx-auto")
-
-        recipeIngred.text("Ingredients: " + fullRecipe.recipeIngredients.join("\n"));
-
-        // Update recipe instruction 
-        let recipeInstructText = fullRecipe.recipeInstructions.replace(/<ol>|<li>|<\/ol|<\/li>|<\/span>|<span>|<p>|<\/p>/g, function(match) {
-            switch (match) {
-                case "<ol>":
-                case "<li>":
-                case "</li>":
-                case "</ol>":
-                case "<span>":
-                case "</span>":
-                case "<p>":
-                case "</p>":
-                    return "";
-            }
-        });
-
-        recipeInstruct.text("Recipe: " + recipeInstructText)
-
-
-        // Create unordered list
-        var unorderList = $("<ul>");
-
-        // For items in ingredients array
-        for (var i =0; i < ingredients.length; i++){
-            // Create list item
-            var ingredientEl = $("<li>");
-            // Change text to indexed item of array
-            ingredientEl.text(ingredients[i]);
-            // Append list item to unordered list
-            unorderList.append(ingredientEl);
-        }
-
-        console.log(unorderList);
-        // Append unordered list to recipe ingredient
-        recipeIngred.append(unorderLis.innerHTML);
-        // Adjust Playlist Image position
-        playlistImg.attr("class","mx-auto")
+        // Send to render function
+        recipeRender(fullRecipe);      
 
 
     });
 }
+
+
+function recipeRender(recipe){
+
+     // Set current recipe button ID
+     currentRecipeFavouriteButton.attr("data-ID",recipe.recipeID)
+
+     // Update header to recipe name
+     recipeHeader.text(recipe.recipeName);
+
+     // Update image to recipe image
+     recipeImg.attr("src",recipe.recipeImageURL);
+
+     
+     // Adjust recipe image position
+     recipeImg.attr("class","mx-auto")
+
+     recipeIngred.text("Ingredients: " + recipe.recipeIngredients.join("\n"));
+
+     // Update recipe instruction 
+     let recipeInstructText = recipe.recipeInstructions.replace(/<ol>|<li>|<\/ol|<\/li>|<\/span>|<span>|<p>|<\/p>/g, function(match) {
+         switch (match) {
+             case "<ol>":
+             case "<li>":
+             case "</li>":
+             case "</ol>":
+             case "<span>":
+             case "</span>":
+             case "<p>":
+             case "</p>":
+                 return "";
+         }
+     });
+
+     recipeInstruct.text("Recipe: " + recipeInstructText)
+
+
+     // Create unordered list
+     var unorderList = $("<ul>");
+
+     // For items in ingredients array
+     for (var i =0; i < recipe.recipeIngredients.length; i++){
+         // Create list item
+         var ingredientEl = $("<li>");
+         // Change text to indexed item of array
+         ingredientEl.text(recipe.recipeIngredients[i]);
+         // Append list item to unordered list
+         unorderList.append(ingredientEl);
+     }
+
+     console.log(unorderList);
+     // Append unordered list to recipe ingredient
+     recipeIngred.append(unorderList.innerHTML);
+     // Adjust Playlist Image position
+     playlistImg.attr("class","mx-auto")
+
+}
+
 
 
 // Function to hide 
