@@ -74,3 +74,8 @@
 #recipeIngred, #recipeInst {
     font-family: Oswald;
 }
+
+#playlistPhoto{
+    height: 450px;
+    width: 550px;
+}

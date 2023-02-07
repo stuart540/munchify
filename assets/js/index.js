@@ -157,6 +157,7 @@ submitButton.on("click",function(){
     var chosenCuisine = $("#selectForm").val();
     // Load the photo 
     getRecipes(chosenCuisine);
+    $("#prevBtn").removeClass("hide");
 })
 
 currentRecipeFavouriteButton.on('click', function () {
