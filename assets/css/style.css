@@ -61,6 +61,10 @@
     height: 200px;
 }
 
+.card:hover{ 
+    transform: scale(1.05);
+}
+
 #recipeInstHeader, #recipeIngredHeader {
     color: #b9fbc0;
     font-family: Oswald;
