@@ -8,7 +8,7 @@ var recipeContainer = $("#recipeContainer");
 var landingContainer = $("#landingContainer");
 
 var randomiseButton = $("#randomiseButton");
-
+var submitButton = $("#submitBtn");
 
 var favouritesContainer = $("#favourites");
 var playlistImg = $("playlistPhoto")
@@ -59,8 +59,25 @@ function getRecipes(cuisine){
         // Adjust recipe image position
         recipeImg.attr("class","mx-auto")
 
-        recipeIngred.text(fullRecipe.recipeIngredients);
+        console.log(ingredients);
 
+
+        // Create unordered list
+        var unorderList = $("<ul>");
+
+        // For items in ingredients array
+        for (var i =0; i < ingredients.length; i++){
+            // Create list item
+            var ingredientEl = $("<li>");
+            // Change text to indexed item of array
+            ingredientEl.text(ingredients[i]);
+            // Append list item to unordered list
+            unorderList.append(ingredientEl);
+        }
+
+        console.log(unorderList);
+        // Append unordered list to recipe ingredient
+        recipeIngred.append(unorderLis.innerHTML);
         // Adjust Playlist Image position
         playlistImg.attr("class","mx-auto")
 
@@ -70,13 +87,21 @@ function getRecipes(cuisine){
 
 
 // Function to hide 
-var hideLanding = function () {
+var displayData = function (cuisine) {
     recipeContainer.removeClass("hide");
     landingContainer.addClass("hide");
-    getRecipes("italian");
+    getRecipes(cuisine);
 }
 
-randomiseButton.on("click",hideLanding);
+randomiseButton.on("click",displayData);
+
+// When user clicks on submit
+submitButton.on("click",function(){
+    // Get the value chosen in the form
+    var chosenCuisine = $("#selectForm").val();
+    // Load the photo 
+    displayData(chosenCuisine);
+})
 
 
 });

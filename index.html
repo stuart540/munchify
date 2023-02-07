@@ -61,7 +61,7 @@
         Recipe Placeholder
         </div>
         <img src="" alt="Recipe Photo" id="recipePhoto" placeholder="test">
-        <div class="recipeIngred"> ingredients </div>
+        <div class="recipeIngred"> Ingredients: </div>
         <p class="recipeInst"> recipe </p>
       </div>
     <div class="col">
@@ -79,10 +79,15 @@
   <div class="container" id="buttonContainer">
     <div class="row">
       <div class="col">
-        <h1>Search an input...</h1>
+        <h1>Search a cuisine...</h1>
         <select class="form-control form-control-lg" id="selectForm">
           <option>Select..</option>
+          <option value="indian">Indian</option>
+          <option value="chinese">Chinese</option>
+          <option value="italian">Italian</option>
+          <option value="mexican">Mexican</option>
         </select>
+        <button type="submit" class="btn btn" id="submitBtn">Submit</button>
       </div>
       <div class="col">
         <h1>Randomly generate</h1>
