@@ -70,3 +70,8 @@
     color: #b9fbc0;
     font-family: Oswald;
 }
+
+#playlistPhoto{
+    height: 450px;
+    width: 550px;
+}
