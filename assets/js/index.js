@@ -68,7 +68,24 @@ function getRecipes(cuisine){
         // Adjust recipe image position
         recipeImg.attr("class","mx-auto")
 
-        recipeIngred.text(fullRecipe.recipeIngredients);
+        recipeIngred.text("Ingredients: " + fullRecipe.recipeIngredients.join("\n"));
+
+        // Update recipe instruction 
+        let recipeInstructText = fullRecipe.recipeInstructions.replace(/<ol>|<li>|<\/ol|<\/li>|<\/span>|<span>|<p>|<\/p>/g, function(match) {
+            switch (match) {
+                case "<ol>":
+                case "<li>":
+                case "</li>":
+                case "</ol>":
+                case "<span>":
+                case "</span>":
+                case "<p>":
+                case "</p>":
+                    return "";
+            }
+        });
+
+        recipeInstruct.text("Recipe: " + recipeInstructText)
 
         // Adjust Playlist Image position
         playlistImg.attr("class","mx-auto")
