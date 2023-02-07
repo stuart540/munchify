@@ -42,7 +42,7 @@ function getRecipes(cuisine){
 
         });
         
-        var currentRecipe = {
+        var fullRecipe = {
             recipeName : response.recipes[0].title,
             recipeIngredients : ingredients,
             recipeImageURL : response.recipes[0].image,
@@ -51,24 +51,24 @@ function getRecipes(cuisine){
             recipeID : response.recipes[0].id
         }
 
-        // Add currentRecipe to the tempRecipes array where we hold the recipes we're dealing with in this session
-        tempRecipes.push(currentRecipe);
+        // Add fullRecipe to the tempRecipes array where we hold the recipes we're dealing with in this session
+        tempRecipes.push(fullRecipe);
         console.log(tempRecipes)
 
         // Set current recipe button ID
-        currentRecipeFavouriteButton.attr("data-ID",currentRecipe.recipeID)
+        currentRecipeFavouriteButton.attr("data-ID",fullRecipe.recipeID)
 
         // Update header to recipe name
-        recipeHeader.text(currentRecipe.recipeName);
+        recipeHeader.text(fullRecipe.recipeName);
 
         // Update image to recipe image
-        recipeImg.attr("src",currentRecipe.recipeImageURL);
+        recipeImg.attr("src",fullRecipe.recipeImageURL);
 
         
         // Adjust recipe image position
         recipeImg.attr("class","mx-auto")
 
-        recipeIngred.text(currentRecipe.recipeIngredients);
+        recipeIngred.text(fullRecipe.recipeIngredients);
 
         // Adjust Playlist Image position
         playlistImg.attr("class","mx-auto")
@@ -149,6 +149,12 @@ function retrievePreviousRecipes(){
     }    
     // Pick 3 elements indexs in recipe list to display. Or if less than 4 just pick what we have
     var selectedRecipes = []
+
+    // If there is nothing to load then exit function
+
+    if (keys.length === 0){
+        return;
+    }
     if (keys.length < 4){
         switch(keys.length) {
             case 1:
@@ -166,6 +172,10 @@ function retrievePreviousRecipes(){
     
     // Setting a counter for next forEach loop
     x = 0
+
+    // Show the header
+    var header = $("#previousSearch")
+        header.removeClass("hide")
     
     // Generate cards for each of the recipes we've picked and append to page
     selectedRecipes.forEach(element => {
@@ -190,7 +200,8 @@ function retrievePreviousRecipes(){
         x++ 
 
         // Pass recipe object and html element we're appending card to into card renderer
-        recipeCardRender(thisRecipe,)
+        var cardDeck = $("#previousCards")
+        recipeCardRender(thisRecipe,cardDeck)
 
     });
 
@@ -213,11 +224,27 @@ function generateRandomNumbers(n,max){
 // Function to generate a bootstrap card from recipe object passed in and append to specified html element
 
 function recipeCardRender(recipe,htmlEl){
+    var card = $('<div>')
+    var cardImg = $('<img>')
+    var cardBody = $('<div>')
+    var cardh5 = $('<h5>')
+    
+    card.addClass("card")
+    cardImg.addClass("card-img-top")
+    cardBody.addClass("card-body")
+    cardh5.addClass("card-title")
+    
+    cardImg.attr("src",recipe.recipeImageURL)
+    cardh5.text(recipe.recipeName)
 
-
-
-
+    cardBody.append(cardh5);
+    card.append(cardImg);
+    card.append(cardBody);
+    htmlEl.append(card)
 
 }
 
+retrievePreviousRecipes()
+
 });
+
