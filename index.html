@@ -59,13 +59,13 @@
     <div class="row">
       <div id="recipeSection" data-recipevar="currentRecipe" class="col">
   <!-- Dynamically update recipe header -->
-        <div class="h2" id="recipeHeader">
-        Recipe Placeholder
-        </div>
+        <div class="h2" id="recipeHeader">Recipe Placeholder</div>
         <img src="" alt="Recipe Photo" id="recipePhoto" placeholder="test">
-
-        <div class="recipeIngred" id="recipeIngred"> ingredients </div>
-        <p class="recipeInst" id="recipeInst"> recipe </p>
+  <!-- The layout of the recipe -->
+        <h3 id="recipeIngredHeader" class="font-effect-outline">Ingredients:</h3>
+        <p class="recipeIngred" id="recipeIngred"></p>
+        <h3 id="recipeInstHeader" class="font-effect-outline">Recipe:</h3>
+        <p class="recipeInst" id="recipeInst"></p>
         <button type="button" class="btn btn-lg" data-saved="false" id="currentFavouriteButton">Add to favourites</button>
 
       </div>
