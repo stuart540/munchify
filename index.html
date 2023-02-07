@@ -48,6 +48,8 @@
       <div class="row" id="headerRow">
       <p class="font-effect-outline" id="jumbo2">All in one spot!</p>
       </div>
+      <button class="hide" id="prevBtn"> Go Back </button>
+
       </div>
     </div>
   </div>
@@ -57,13 +59,13 @@
     <div class="row">
       <div id="recipeSection" data-recipevar="currentRecipe" class="col">
   <!-- Dynamically update recipe header -->
-        <div class="h2" id="recipeHeader">
-        Recipe Placeholder
-        </div>
+        <div class="h2" id="recipeHeader">Recipe Placeholder</div>
         <img src="" alt="Recipe Photo" id="recipePhoto" placeholder="test">
-
-        <div class="recipeIngred" id="recipeIngred"> ingredients </div>
-        <p class="recipeInst" id="recipeInst"> recipe </p>
+  <!-- The layout of the recipe -->
+        <h3 id="recipeIngredHeader" class="font-effect-outline">Ingredients:</h3>
+        <p class="recipeIngred" id="recipeIngred"></p>
+        <h3 id="recipeInstHeader" class="font-effect-outline">Recipe:</h3>
+        <p class="recipeInst" id="recipeInst"></p>
         <button type="button" class="btn btn-lg" data-saved="false" id="favouriteButton">Add to favourites</button>
 
       </div>
@@ -102,7 +104,7 @@
   <div class="container" >
     <div class="row">
       <div class="col">
-        <h2 class="hide" id="previousSearch">Why not try again?</h1>
+        <h2 class="hide" id="previousSearch">Try Again..</h1>
       </div>
     </div>
     <div class="row">
