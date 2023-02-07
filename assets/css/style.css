@@ -53,9 +53,9 @@
     justify-content: center;
 }
 
-.navbar{
+/* .navbar{
     background-color: #e9edc9;
-}
+} */
 
 #munchify_logo{
     height: 200px;
@@ -65,7 +65,11 @@
     transform: scale(1.05);
 }
 
-#recipeInstHeader, #recipeIngredHeader {
+#searchHeader, #randomHeader, #recipeHeader, #recipeInstHeader, #recipeIngredHeader {
     color: #b9fbc0;
+    font-family: Raleway;
+}
+
+#recipeIngred, #recipeInst {
     font-family: Oswald;
 }
