@@ -30,7 +30,7 @@ var playlistImg = $("playlistPhoto")
 
 
 function getRecipes(cuisine){
-    var queryURL = "https://api.spoonacular.com/recipes/random?apiKey=ad7eae9455534c2b9df85e498cdf804b&number=1&tags=dinner,main dish,"+cuisine
+    var queryURL = "https://api.spoonacular.com/recipes/random?apiKey=f14cec32cf4e47acbb3dd6e49f5de686&number=1&tags=dinner,main dish,"+cuisine
     $.ajax({
     url: queryURL,
     method: "GET"
@@ -124,10 +124,17 @@ function recipeRender(recipe){
 var displayData = function (cuisine) {
     recipeContainer.removeClass("hide");
     landingContainer.addClass("hide");
+    $("#prevBtn").removeClass("hide");
     getRecipes(cuisine);
 }
 
 randomiseButton.on("click",displayData);
+
+$("#prevBtn").on("click",function(){
+    recipeContainer.addClass("hide");
+    landingContainer.removeClass("hide");
+    $("#prevBtn").addClass("hide");
+})
 
 // When user clicks on submit
 submitButton.on("click",function(){
