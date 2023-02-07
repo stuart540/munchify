@@ -10,7 +10,6 @@ var landingContainer = $("#landingContainer");
 var randomiseButton = $("#randomiseButton");
 
 
-var currentRecipe = {}
 var tempRecipes = []
 var recipeCard0 = {}
 var recipeCard1 = {}
@@ -42,9 +41,8 @@ function getRecipes(cuisine){
             ingredients.push(element.original);    
 
         });
-
-        // This is a global variable so it's easier to retrieve for the favourites button function
-        currentRecipe = {
+        
+        var currentRecipe = {
             recipeName : response.recipes[0].title,
             recipeIngredients : ingredients,
             recipeImageURL : response.recipes[0].image,
@@ -52,6 +50,10 @@ function getRecipes(cuisine){
             recipeURL : response.recipes[0].sourceUrl,
             recipeID : response.recipes[0].id
         }
+
+        // Add currentRecipe to the tempRecipes array where we hold the recipes we're dealing with in this session
+        tempRecipes.push(currentRecipe);
+        console.log(tempRecipes)
 
         // Set current recipe button ID
         currentRecipeFavouriteButton.attr("data-ID",currentRecipe.recipeID)
@@ -97,35 +99,34 @@ currentRecipeFavouriteButton.on('click', function () {
 
 // Pass in the jquery element of the button. The button should have the recipe ID attached to it.
 function favouriteRecipe(htmlevent){
-    console.log(htmlevent)
-    console.log(htmlevent.attr("data-saved"))
+
 if(htmlevent.attr("data-saved") === "false")
 {
-    htmlevent.attr("data-saved", "true") 
+    htmlevent.attr("data-saved", "true")
+    htmlevent.text("Remove from favourites") 
     // Need to add a line here to update styling/text content on button to show the recipe is saved    
     // --------
 
     // Adding the recipe into local storage using the ID from spoonacular as the name.
-    // Using the spoonacular ID gives us a unique ID for each recipe so we can easily check if it already exists
+    // Using the spoonacular ID gives us a unique ID for each recipe
+      var savingRecipe = tempRecipes.find(obj => {
+        return obj.recipeID === parseInt(htmlevent.attr("data-ID"))
+      })
+      console.log(savingRecipe)
+      var savingRecipeJSON = JSON.stringify(savingRecipe);
     // Add "recipeID_" to the start of each key so if we store anything else in local storage we can seperate out recipes
-    // Define currentRecipe as a global variable elsewhere. It should be an object matching the structure of the fullRecipe object in getRecipes()
+      localStorage.setItem(("recipeID_"+savingRecipe.recipeID), savingRecipeJSON);
     
-    if(htmlevent.attr("data-ID") === currentRecipe.recipeID){
-    var savingRecipe = JSON.stringify(currentRecipe);
-    localStorage.setItem(("recipeID_"+currentRecipe.recipeID), savingRecipe);
-    }
-    else
-    {
-      var savingRecipe  
-    }
 }
 else
 {
     htmlevent.attr("data-saved", "false");
-    // Put the recipe details into a global variable so if the user changes their mind they can click button again and add back to favourites
+    htmlevent.text("Add to favourites")
+    
+    // Put the recipe details into a global variable so if the user changes their mind they can click button again and add back to favourites. This will clear when they leave the page.
+    tempRecipes.push(JSON.parse(localStorage.getItem("recipeID_"+htmlevent.attr("data-ID"))))
 
-
-    localStorage.removeItem(("recipeID_"+currentRecipe.recipeID));
+    localStorage.removeItem(("recipeID_"+htmlevent.attr("data-ID")));
 
     // Need to add a line here to update styling/text content on button to show the recipe is not saved
     // ---------
