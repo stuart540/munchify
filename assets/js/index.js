@@ -65,7 +65,7 @@ function getRecipes(cuisine){
 function recipeRender(recipe){
     recipeContainer.removeClass("hide");
     landingContainer.addClass("hide");
-
+    $("#prevBtn").removeClass("hide");
     console.log(recipe)
      // Set current recipe button ID
      currentRecipeFavouriteButton.attr("data-ID",recipe.recipeID)
