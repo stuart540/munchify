@@ -8,7 +8,7 @@ var recipeContainer = $("#recipeContainer");
 var landingContainer = $("#landingContainer");
 
 var randomiseButton = $("#randomiseButton");
-
+var submitButton = $("#submitBtn");
 
 var tempRecipes = []
 var recipeCard0 = {}
@@ -53,57 +53,89 @@ function getRecipes(cuisine){
 
         // Add fullRecipe to the tempRecipes array where we hold the recipes we're dealing with in this session
         tempRecipes.push(fullRecipe);
-        console.log(tempRecipes)
 
-        // Set current recipe button ID
-        currentRecipeFavouriteButton.attr("data-ID",fullRecipe.recipeID)
-
-        // Update header to recipe name
-        recipeHeader.text(fullRecipe.recipeName);
-
-        // Update image to recipe image
-        recipeImg.attr("src",fullRecipe.recipeImageURL);
-
-        
-        // Adjust recipe image position
-        recipeImg.attr("class","mx-auto")
-
-        recipeIngred.text("Ingredients: " + fullRecipe.recipeIngredients.join("\n"));
-
-        // Update recipe instruction 
-        let recipeInstructText = fullRecipe.recipeInstructions.replace(/<ol>|<li>|<\/ol|<\/li>|<\/span>|<span>|<p>|<\/p>/g, function(match) {
-            switch (match) {
-                case "<ol>":
-                case "<li>":
-                case "</li>":
-                case "</ol>":
-                case "<span>":
-                case "</span>":
-                case "<p>":
-                case "</p>":
-                    return "";
-            }
-        });
-
-        recipeInstruct.text("Recipe: " + recipeInstructText)
-
-        // Adjust Playlist Image position
-        playlistImg.attr("class","mx-auto")
+        // Send to render function
+        recipeRender(fullRecipe);      
 
 
     });
 }
 
 
-// Function to hide 
-var hideLanding = function () {
-    recipeContainer.removeClass("hide");
-    landingContainer.addClass("hide");
+function recipeRender(recipe){
 
-    getRecipes("italian");
+     // Set current recipe button ID
+     currentRecipeFavouriteButton.attr("data-ID",recipe.recipeID)
+
+     // Update header to recipe name
+     recipeHeader.text(recipe.recipeName);
+
+     // Update image to recipe image
+     recipeImg.attr("src",recipe.recipeImageURL);
+
+     
+     // Adjust recipe image position
+     recipeImg.attr("class","mx-auto")
+
+     recipeIngred.text("Ingredients: " + recipe.recipeIngredients.join("\n"));
+
+     // Update recipe instruction 
+     let recipeInstructText = recipe.recipeInstructions.replace(/<ol>|<li>|<\/ol|<\/li>|<\/span>|<span>|<p>|<\/p>/g, function(match) {
+         switch (match) {
+             case "<ol>":
+             case "<li>":
+             case "</li>":
+             case "</ol>":
+             case "<span>":
+             case "</span>":
+             case "<p>":
+             case "</p>":
+                 return "";
+         }
+     });
+
+     recipeInstruct.text("Recipe: " + recipeInstructText)
+
+
+     // Create unordered list
+     var unorderList = $("<ul>");
+
+     // For items in ingredients array
+     for (var i =0; i < recipe.recipeIngredients.length; i++){
+         // Create list item
+         var ingredientEl = $("<li>");
+         // Change text to indexed item of array
+         ingredientEl.text(recipe.recipeIngredients[i]);
+         // Append list item to unordered list
+         unorderList.append(ingredientEl);
+     }
+
+     console.log(unorderList);
+     // Append unordered list to recipe ingredient
+     recipeIngred.append(unorderList.innerHTML);
+     // Adjust Playlist Image position
+     playlistImg.attr("class","mx-auto")
+
 }
 
-randomiseButton.on("click",hideLanding);
+
+
+// Function to hide 
+var displayData = function (cuisine) {
+    recipeContainer.removeClass("hide");
+    landingContainer.addClass("hide");
+    getRecipes(cuisine);
+}
+
+randomiseButton.on("click",displayData);
+
+// When user clicks on submit
+submitButton.on("click",function(){
+    // Get the value chosen in the form
+    var chosenCuisine = $("#selectForm").val();
+    // Load the photo 
+    displayData(chosenCuisine);
+})
 
 currentRecipeFavouriteButton.on('click', function () {
       favouriteRecipe(currentRecipeFavouriteButton)
@@ -241,27 +273,28 @@ function generateRandomNumbers(n,max){
 // Function to generate a bootstrap card from recipe object passed in and append to specified html element
 
 function recipeCardRender(recipe,htmlEl){
-    var card = $('<div>')
-    var cardImg = $('<img>')
-    var cardBody = $('<div>')
-    var cardh5 = $('<h5>')
+    var card = $('<div>');
+    var cardImg = $('<img>');
+    var cardBody = $('<div>');
+    var cardh5 = $('<h5>');
     
-    card.addClass("card")
-    cardImg.addClass("card-img-top")
-    cardBody.addClass("card-body")
-    cardh5.addClass("card-title")
+    card.addClass("card");
+    cardImg.addClass("card-img-top");
+    cardBody.addClass("card-body");
+    cardh5.addClass("card-title");
     
-    cardImg.attr("src",recipe.recipeImageURL)
-    cardh5.text(recipe.recipeName)
+    cardImg.attr("src",recipe.recipeImageURL);
+    cardh5.text(recipe.recipeName);
 
     cardBody.append(cardh5);
+    cardBody.attr("style","background-color:#b9fbc0;");
     card.append(cardImg);
     card.append(cardBody);
-    htmlEl.append(card)
+    htmlEl.append(card);
 
 }
 
-retrievePreviousRecipes()
+retrievePreviousRecipes();
 
 });
 
