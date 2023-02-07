@@ -8,7 +8,7 @@ var recipeContainer = $("#recipeContainer");
 var landingContainer = $("#landingContainer");
 
 var randomiseButton = $("#randomiseButton");
-
+var submitButton = $("#submitBtn");
 
 var tempRecipes = []
 var recipeCard0 = {}
@@ -87,6 +87,23 @@ function getRecipes(cuisine){
 
         recipeInstruct.text("Recipe: " + recipeInstructText)
 
+
+        // Create unordered list
+        var unorderList = $("<ul>");
+
+        // For items in ingredients array
+        for (var i =0; i < ingredients.length; i++){
+            // Create list item
+            var ingredientEl = $("<li>");
+            // Change text to indexed item of array
+            ingredientEl.text(ingredients[i]);
+            // Append list item to unordered list
+            unorderList.append(ingredientEl);
+        }
+
+        console.log(unorderList);
+        // Append unordered list to recipe ingredient
+        recipeIngred.append(unorderLis.innerHTML);
         // Adjust Playlist Image position
         playlistImg.attr("class","mx-auto")
 
@@ -96,14 +113,21 @@ function getRecipes(cuisine){
 
 
 // Function to hide 
-var hideLanding = function () {
+var displayData = function (cuisine) {
     recipeContainer.removeClass("hide");
     landingContainer.addClass("hide");
-
-    getRecipes("italian");
+    getRecipes(cuisine);
 }
 
-randomiseButton.on("click",hideLanding);
+randomiseButton.on("click",displayData);
+
+// When user clicks on submit
+submitButton.on("click",function(){
+    // Get the value chosen in the form
+    var chosenCuisine = $("#selectForm").val();
+    // Load the photo 
+    displayData(chosenCuisine);
+})
 
 currentRecipeFavouriteButton.on('click', function () {
       favouriteRecipe(currentRecipeFavouriteButton)
@@ -241,27 +265,27 @@ function generateRandomNumbers(n,max){
 // Function to generate a bootstrap card from recipe object passed in and append to specified html element
 
 function recipeCardRender(recipe,htmlEl){
-    var card = $('<div>')
-    var cardImg = $('<img>')
-    var cardBody = $('<div>')
-    var cardh5 = $('<h5>')
+    var card = $('<div>');
+    var cardImg = $('<img>');
+    var cardBody = $('<div>');
+    var cardh5 = $('<h5>');
     
-    card.addClass("card")
-    cardImg.addClass("card-img-top")
-    cardBody.addClass("card-body")
-    cardh5.addClass("card-title")
+    card.addClass("card");
+    cardImg.addClass("card-img-top");
+    cardBody.addClass("card-body");
+    cardh5.addClass("card-title");
     
-    cardImg.attr("src",recipe.recipeImageURL)
-    cardh5.text(recipe.recipeName)
+    cardImg.attr("src",recipe.recipeImageURL);
+    cardh5.text(recipe.recipeName);
 
     cardBody.append(cardh5);
     card.append(cardImg);
     card.append(cardBody);
-    htmlEl.append(card)
+    htmlEl.append(card);
 
 }
 
-retrievePreviousRecipes()
+retrievePreviousRecipes();
 
 });
 

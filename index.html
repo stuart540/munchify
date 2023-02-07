@@ -61,15 +61,9 @@
         Recipe Placeholder
         </div>
         <img src="" alt="Recipe Photo" id="recipePhoto" placeholder="test">
-<<<<<<< HEAD
-        <div class="recipeIngred" id="recipeIngred"> ingredients </div>
-        <p class="recipeInst" id="recipeInst"> recipe </p>
-        <button type="button" class="btn btn-lg" data-saved="false" id="currentFavouriteButton">Add to favourites</button>
-=======
         <div class="recipeIngred"> ingredients </div>
         <p class="recipeInst"> recipe </p>
         <button type="button" class="btn btn-lg" data-saved="false" id="currentFavouriteButton">Add to favourites</button>
->>>>>>> f9628628fbf5dbacd67c1a5ac1f4b30307ac0f17
       </div>
     <div id="playlistSection" class="col">
   <!-- Dynamically update recipe header -->
@@ -86,10 +80,15 @@
   <div class="container" id="buttonContainer">
     <div class="row">
       <div class="col">
-        <h1>Search an input...</h1>
+        <h1>Search a cuisine...</h1>
         <select class="form-control form-control-lg" id="selectForm">
           <option>Select..</option>
+          <option value="indian">Indian</option>
+          <option value="chinese">Chinese</option>
+          <option value="italian">Italian</option>
+          <option value="mexican">Mexican</option>
         </select>
+        <button type="submit" class="btn btn" id="submitBtn">Submit</button>
       </div>
       <div class="col">
         <h1>Randomly generate</h1>
