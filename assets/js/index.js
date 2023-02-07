@@ -77,7 +77,7 @@ function recipeRender(recipe){
      // Adjust recipe image position
      recipeImg.attr("class","mx-auto")
 
-     recipeIngred.text("Ingredients: " + recipe.recipeIngredients.join("\n"));
+     recipeIngred.text(recipe.recipeIngredients);
 
      // Update recipe instruction 
      let recipeInstructText = recipe.recipeInstructions.replace(/<ol>|<li>|<\/ol|<\/li>|<\/span>|<span>|<p>|<\/p>/g, function(match) {
@@ -94,7 +94,7 @@ function recipeRender(recipe){
          }
      });
 
-     recipeInstruct.text("Recipe: " + recipeInstructText)
+     recipeInstruct.text(recipeInstructText)
 
 
      // Create unordered list

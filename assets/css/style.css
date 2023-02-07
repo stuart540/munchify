@@ -59,3 +59,8 @@
 #munchify_logo{
     height: 200px;
 }
+
+#recipeInstHeader, #recipeIngredHeader {
+    color: #b9fbc0;
+    font-family: Oswald;
+}
