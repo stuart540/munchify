@@ -11,11 +11,12 @@ var randomiseButton = $("#randomiseButton");
 
 
 var currentRecipe = {}
+var tempRecipes = []
 var recipeCard0 = {}
 var recipeCard1 = {}
 var recipeCard2 = {}
 
-var currentRecipeFavouriteButton = $("#favouriteButton");
+var currentRecipeFavouriteButton = $("#currentFavouriteButton");
 var favouritesContainer = $("#favourites");
 var playlistImg = $("playlistPhoto")
 
@@ -36,14 +37,9 @@ function getRecipes(cuisine){
     method: "GET"
   })
     .then(function(response) {
-
-        console.log(response);
-
-
         var ingredients = [];
         response.recipes[0].extendedIngredients.forEach(element => {
-            ingredients.push(element.original);
-        
+            ingredients.push(element.original);    
 
         });
 
@@ -57,8 +53,8 @@ function getRecipes(cuisine){
             recipeID : response.recipes[0].id
         }
 
-        console.log(currentRecipe);
-    
+        // Set current recipe button ID
+        currentRecipeFavouriteButton.attr("data-ID",currentRecipe.recipeID)
 
         // Update header to recipe name
         recipeHeader.text(currentRecipe.recipeName);
@@ -91,14 +87,15 @@ var hideLanding = function () {
 randomiseButton.on("click",hideLanding);
 
 currentRecipeFavouriteButton.on('click', function () {
-   favouriteRecipe(currentRecipeFavouriteButton)
+      favouriteRecipe(currentRecipeFavouriteButton)
     });
 
-// I'm going to change this around so we can call it as a function when the button is pressed on any recipe - not just on the current one.
+
+// I'm going to change favouriteRecipe() so we can call it as a function when the button is pressed on any recipe - not just on the current one.
 // Save current recipe to local storage when favourite button is clicked. Or, remove from local storage if clicked again.
 // When we initially generate the favourites button we need to check whether the recipe ID is already present in local storage. Then, set the data-saved attribute to true if it is or false if not
 
-// Pass in the jquery element of the button
+// Pass in the jquery element of the button. The button should have the recipe ID attached to it.
 function favouriteRecipe(htmlevent){
     console.log(htmlevent)
     console.log(htmlevent.attr("data-saved"))
@@ -112,17 +109,28 @@ if(htmlevent.attr("data-saved") === "false")
     // Using the spoonacular ID gives us a unique ID for each recipe so we can easily check if it already exists
     // Add "recipeID_" to the start of each key so if we store anything else in local storage we can seperate out recipes
     // Define currentRecipe as a global variable elsewhere. It should be an object matching the structure of the fullRecipe object in getRecipes()
+    
+    if(htmlevent.attr("data-ID") === currentRecipe.recipeID){
     var savingRecipe = JSON.stringify(currentRecipe);
     localStorage.setItem(("recipeID_"+currentRecipe.recipeID), savingRecipe);
+    }
+    else
+    {
+      var savingRecipe  
+    }
 }
 else
 {
     htmlevent.attr("data-saved", "false");
+    // Put the recipe details into a global variable so if the user changes their mind they can click button again and add back to favourites
+
+
     localStorage.removeItem(("recipeID_"+currentRecipe.recipeID));
 
     // Need to add a line here to update styling/text content on button to show the recipe is not saved
     // ---------
 }
+
 };
 
 function retrievePreviousRecipes(){
@@ -155,13 +163,35 @@ function retrievePreviousRecipes(){
         selectedRecipes = generateRandomNumbers(3,keys.length)
     }
     
+    // Setting a counter for next forEach loop
+    x = 0
     
     // Generate cards for each of the recipes we've picked and append to page
     selectedRecipes.forEach(element => {
         
+        // Parse the recipe we're looking for
+        thisRecipe = JSON.parse(values[element])
+
+        // Set card global variable
+
+        switch(x) {
+            case 0:
+              recipeCard0 = thisRecipe
+              break;
+            case 1:
+              recipeCard1 = thisRecipe
+              break;
+            case 2:
+              recipeCard2 = thisRecipe
+        }
+        
+        // Increment the counter so we set the next variable
+        x++ 
+
+        // Pass recipe object and html element we're appending card to into card renderer
+        recipeCardRender(thisRecipe,)
+
     });
-
-
 
 }
 
@@ -181,7 +211,7 @@ function generateRandomNumbers(n,max){
 
 // Function to generate a bootstrap card from recipe object passed in and append to specified html element
 
-function savedRecipeCardsRender(recipe,htmlEl){
+function recipeCardRender(recipe,htmlEl){
 
 
 
