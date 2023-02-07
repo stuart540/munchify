@@ -287,6 +287,7 @@ function recipeCardRender(recipe,htmlEl){
     cardh5.text(recipe.recipeName);
 
     cardBody.append(cardh5);
+    cardBody.attr("style","background-color:#b9fbc0;");
     card.append(cardImg);
     card.append(cardBody);
     htmlEl.append(card);
