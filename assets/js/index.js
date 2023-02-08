@@ -1,8 +1,6 @@
 $(document).ready(function(){
 
-var cuisinesList = [
-    ""
-]
+
 
 var recipeContainer = $("#recipeContainer");
 var landingContainer = $("#landingContainer");
@@ -12,9 +10,6 @@ var randomiseButton = $("#randomiseButton");
 var submitButton = $("#submitBtn");
 
 var tempRecipes = []
-var recipeCard0 = {}
-var recipeCard1 = {}
-var recipeCard2 = {}
 
 var currentRecipeFavouriteButton = $("#favouriteButton");
 var favouriteColumn0 = $("#favouriteColumn0");
@@ -28,13 +23,14 @@ var recipeHeader = $("#recipeHeader");
 var recipeImg = $("#recipePhoto");
 var recipeIngred = $("#recipeIngred");
 var recipeInstruct = $("#recipeInst");
+var recipeLink = $("#recipeLink")
 
 // Playlist elements
 var playlistImg = $("playlistPhoto")
 
 
 function getRecipes(cuisine){
-    var queryURL = "https://api.spoonacular.com/recipes/random?apiKey=f14cec32cf4e47acbb3dd6e49f5de686&number=1&tags=dinner,main dish,"+cuisine
+    var queryURL = "https://api.spoonacular.com/recipes/random?apiKey=f14cec32cf4e47acbb3dd6e49f5de686&number=1&tags=dinner,"+cuisine
     $.ajax({
     url: queryURL,
     method: "GET"
@@ -45,14 +41,15 @@ function getRecipes(cuisine){
             ingredients.push(element.original);    
 
         });
-        
+        console.log(response)
         var fullRecipe = {
             recipeName : response.recipes[0].title,
             recipeIngredients : ingredients,
             recipeImageURL : response.recipes[0].image,
             recipeInstructions : response.recipes[0].instructions,
             recipeURL : response.recipes[0].sourceUrl,
-            recipeID : response.recipes[0].id
+            recipeID : response.recipes[0].id,
+            recipeCuisine : response.recipes[0].cuisines[0]
         }
 
         // Add fullRecipe to the tempRecipes array where we hold the recipes we're dealing with in this session
@@ -92,6 +89,7 @@ function recipeRender(recipe){
 
      // Update image to recipe image
      recipeImg.attr("src",recipe.recipeImageURL);
+     recipeLink.attr("href",recipe.recipeURL);
 
      
      // Adjust recipe image position
@@ -191,8 +189,7 @@ if(htmlevent.attr("data-saved") === "false")
 {
     htmlevent.attr("data-saved", "true")
     htmlevent.text("Remove from favourites") 
-    // Need to add a line here to update styling/text content on button to show the recipe is saved    
-    // --------
+
 
     // Adding the recipe into local storage using the ID from spoonacular as the name.
     // Using the spoonacular ID gives us a unique ID for each recipe
@@ -215,8 +212,6 @@ else
 
     localStorage.removeItem(("recipeID_"+htmlevent.attr("data-ID")));
 
-    // Need to add a line here to update styling/text content on button to show the recipe is not saved
-    // ---------
 }
 
 };
