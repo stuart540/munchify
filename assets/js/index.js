@@ -91,7 +91,7 @@ function recipeRender(recipe){
 
      $("#confirmLink").on("click",function(){
 
-        window.location.assign(recipe.recipeURL);
+        window.open(recipe.recipeURL,"_blank");
 
      })
 
