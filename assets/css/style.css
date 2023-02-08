@@ -3,6 +3,7 @@
 }
 
 
+
 #landingJumbotron{
     display: grid;
     place-items: center;
@@ -80,3 +81,7 @@
     height: 450px;
     width: 550px;
 }
+
+a {
+   all:unset
+  }
