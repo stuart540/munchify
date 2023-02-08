@@ -62,8 +62,8 @@ function getRecipes(cuisine){
 }
 
 
+
 function recipeRender(recipe){
-    getSpotifyPlaylist(recipe.recipeCuisine);
     recipeContainer.removeClass("hide");
     landingContainer.addClass("hide");
     favouritesContainer.addClass("hide");
@@ -138,6 +138,7 @@ function recipeRender(recipe){
      recipeIngred.append(unorderList.innerHTML);
      // Adjust Playlist Image position
      playlistImg.attr("class","mx-auto")
+     getSpotifyPlaylist(recipe.recipeCuisine);
 
 }
 
