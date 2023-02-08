@@ -61,7 +61,7 @@
   <!-- containers showing recipe and spotify playlist -->
   <div class="container-fluid hide" id="recipeContainer">
     <div class="row">
-      <div id="recipeSection" data-recipevar="currentRecipe" class="col">
+      <div id="recipeSection" data-recipevar="currentRecipe" class="col col-12 col-sm-12 col-md-12 col-lg-12 col-xl-6">
   <!-- Dynamically update recipe header -->
         <div class="h2 font-effect-outline" id="recipeHeader">Recipe Placeholder</div>
         <img src="" alt="Recipe Photo" id="recipePhoto" placeholder="test">
@@ -78,10 +78,10 @@
         </button>
 
       </div>
-    <div id="playlistSection" class="col">
+    <div id="playlistSection" class="col col-12 col-sm-12 col-md-12 col-lg-12 col-xl-6">
   <!-- Dynamically update recipe header -->
         <div class="h2 font-effect-outline" id="recipeHeader">
-        Playlist Placeholder
+        Playlist
         </div>
         <img src="" alt="Playlist photo" id="playlistPhoto" placeholder="test">
         
@@ -92,7 +92,7 @@
 <div class="container-fluid" id="landingContainer">
   <div class="container" id="buttonContainer">
     <div class="row">
-      <div class="col">
+      <div class="col col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
         <h2 class="font-effect-outline" id="searchHeader">Search a cuisine...</h2>
         <select class="form-control form-control-lg" id="selectForm">
           <option>Select..</option>
@@ -103,9 +103,10 @@
         </select>
         <button type="submit" class="btn btn" id="submitBtn">Submit</button>
       </div>
-      <div class="col">
+      <div class="col col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
         <h2 class="font-effect-outline" id="randomHeader">or dare yourself?</h2>
-        <button type="button" class="btn btn-lg" id="randomiseButton">Randomise..</button>
+        <button type="button" class="btn btn-lg" id="randomiseButton">Surprise Me!</button>
+        <button type="submit" class="btn inactive invisible" id="placeholderBtn">Placehoder</button>
       </div>
     </div>
   </div>
