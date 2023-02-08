@@ -1,5 +1,6 @@
 *{
     color: #22333b;
+    font-family: Roboto;
 }
 
 
@@ -53,10 +54,6 @@
     align-items: center;
     justify-content: center;
 }
-
-/* .navbar{
-    background-color: #e9edc9;
-} */
 
 #munchify_logo{
     height: 200px;
