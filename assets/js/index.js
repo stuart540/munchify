@@ -380,7 +380,13 @@ function recipeCardRenderWithButtons(recipe,htmlEl){
     cardImg.attr("src",recipe.recipeImageURL);
     cardh5.text(recipe.recipeName);
     cardButton.attr("data-ID",recipe.recipeID);
+    cardButton.addClass("btn");
+    cardButton.addClass("btn-md");
+    cardButton.addClass("border-dark");
     cardButton.text("Cook Again");
+    removeFaveBtn.addClass("btn");
+    removeFaveBtn.addClass("btn-md");
+    removeFaveBtn.addClass("border-dark");
     removeFaveBtn.text("Remove from favourites");
 
     cardBody.append(cardh5);
