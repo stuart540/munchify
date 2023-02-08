@@ -71,12 +71,30 @@
         <h3 id="recipeInstHeader" class="font-effect-outline">Recipe:</h3>
         <p class="recipeInst" id="recipeInst"></p>
         <button type="button" class="btn btn-lg" data-saved="false" id="favouriteButton">Add to favourites</button>
-        <button type="button" class="btn btn-lg">
-          <a id="recipeLink" href="" target="_blank">
+        <button type="button" class="btn btn-lg" data-toggle="modal" data-target="#exampleModal">
+          <!-- <a id="recipeLink" href="" target="_blank"> -->
             Go to recipe website
-          </a>
+          <!-- </a> -->
         </button>
-
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Caution</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <p>You are about to leave the website to an external link</p>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="confirmLink">Confirm</button>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     <div id="playlistSection" class="col col-12 col-sm-12 col-md-12 col-lg-12 col-xl-6">
   <!-- Dynamically update recipe header -->

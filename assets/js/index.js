@@ -23,7 +23,6 @@ var recipeHeader = $("#recipeHeader");
 var recipeImg = $("#recipePhoto");
 var recipeIngred = $("#recipeIngred");
 var recipeInstruct = $("#recipeInst");
-var recipeLink = $("#recipeLink")
 
 // Playlist elements
 var playlistImg = $("playlistPhoto")
@@ -89,7 +88,12 @@ function recipeRender(recipe){
 
      // Update image to recipe image
      recipeImg.attr("src",recipe.recipeImageURL);
-     recipeLink.attr("href",recipe.recipeURL);
+
+     $("#confirmLink").on("click",function(){
+
+        window.location.assign(recipe.recipeURL);
+
+     })
 
      
      // Adjust recipe image position
