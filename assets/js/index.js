@@ -6,6 +6,7 @@ var cuisinesList = [
 
 var recipeContainer = $("#recipeContainer");
 var landingContainer = $("#landingContainer");
+var favouritesContainer = $("#favouritesContainer")
 
 var randomiseButton = $("#randomiseButton");
 var submitButton = $("#submitBtn");
@@ -16,7 +17,10 @@ var recipeCard1 = {}
 var recipeCard2 = {}
 
 var currentRecipeFavouriteButton = $("#favouriteButton");
-var favouritesContainer = $("#favourites");
+var favouriteColumn0 = $("#favouriteColumn0");
+var favouriteColumn1 = $("#favouriteColumn1");
+var favouriteColumn2 = $("#favouriteColumn2");
+
 var playlistImg = $("playlistPhoto")
 
 // Recipe elements
@@ -65,6 +69,7 @@ function getRecipes(cuisine){
 function recipeRender(recipe){
     recipeContainer.removeClass("hide");
     landingContainer.addClass("hide");
+    favouritesContainer.addClass("hide");
     $("#prevBtn").removeClass("hide");
     console.log(recipe)
      // Set current recipe button ID
@@ -148,7 +153,17 @@ randomiseButton.on("click",displayData);
 $("#prevBtn").on("click",function(){
     recipeContainer.addClass("hide");
     landingContainer.removeClass("hide");
+    favouritesContainer.addClass("hide");
+    retrievePreviousRecipes();
     $("#prevBtn").addClass("hide");
+    $("#favouritesBtn").removeClass("hide");
+})
+$("#favouritesBtn").on("click",function(){
+    recipeContainer.addClass("hide");
+    landingContainer.addClass("hide");
+    favouritesContainer.removeClass("hide");
+    favouritesMenu();
+
 })
 
 // When user clicks on submit
@@ -207,6 +222,11 @@ else
 };
 
 function retrievePreviousRecipes(){
+    // Clear any previously generated card elements and hide the header
+    var cardDeck = $("#previousCards")
+    cardDeck.empty();
+    var header = $("#previousSearch")
+    header.addClass("hide")
     
     // Retrieve all items from local storage and place into arrays
     var keys = Object.keys(localStorage);
@@ -246,7 +266,7 @@ function retrievePreviousRecipes(){
     x = 0
 
     // Show the header
-    var header = $("#previousSearch")
+   
         header.removeClass("hide")
     
     // Generate cards for each of the recipes we've picked and append to page
@@ -272,7 +292,7 @@ function retrievePreviousRecipes(){
         x++ 
 
         // Pass recipe object and html element we're appending card to into card renderer
-        var cardDeck = $("#previousCards")
+        
         recipeCardRender(thisRecipe,cardDeck)
 
     });
@@ -302,7 +322,7 @@ function recipeCardRender(recipe,htmlEl){
     var cardh5 = $('<h5>');
     var cardButton = $('<div>');
     
-    card.addClass("card");
+    card.addClass("card landingCard");
     cardImg.addClass("card-img-top");
     cardBody.addClass("card-body");
     cardh5.addClass("card-title");
@@ -322,7 +342,6 @@ function recipeCardRender(recipe,htmlEl){
 
 
     cardButton.on('click', function () {
-        console.log("run function")
         var recipeID = cardButton.attr("data-ID")
         if(localStorage.getItem("recipeID_"+recipeID) === null){
             var recipe = tempRecipes.find(obj => {
@@ -339,6 +358,120 @@ function recipeCardRender(recipe,htmlEl){
 
 
 }
+
+// Same function as recipeCardRender() except we add a favourite button and try again button
+function recipeCardRenderWithButtons(recipe,htmlEl){
+    var card = $('<div>');
+    var cardImg = $('<img>');
+    var cardBody = $('<div>');
+    var cardh5 = $('<h5>');
+    var cardButton = $('<button>');
+    var removeFaveBtn = $('<button>');
+    
+    card.addClass("card");
+    cardImg.addClass("card-img-top");
+    cardBody.addClass("card-body");
+    cardh5.addClass("card-title");
+    removeFaveBtn.attr("data-saved","true");
+    removeFaveBtn.attr("data-ID",recipe.recipeID);
+    
+    
+    cardImg.attr("src",recipe.recipeImageURL);
+    cardh5.text(recipe.recipeName);
+    cardButton.attr("data-ID",recipe.recipeID);
+    cardButton.text("Cook Again");
+    removeFaveBtn.text("Remove from favourites");
+
+    cardBody.append(cardh5);
+    cardBody.attr("style","background-color:#b9fbc0;");
+    card.append(cardImg);
+    card.append(cardBody);
+    cardBody.append(removeFaveBtn);
+    cardBody.append(cardButton);    
+    htmlEl.append(card);
+
+
+
+    cardButton.on('click', function () {
+        var recipeID = cardButton.attr("data-ID")
+        if(localStorage.getItem("recipeID_"+recipeID) === null){
+            var recipe = tempRecipes.find(obj => {
+                return obj.recipeID === parseInt(recipeID)
+                })
+         }
+         else
+         {
+            var recipe = JSON.parse(localStorage.getItem("recipeID_"+recipeID))
+         }
+         console.log(recipe)
+        recipeRender(recipe)
+      });
+
+    removeFaveBtn.on('click', function () {
+    favouriteRecipe(removeFaveBtn)
+    });
+
+
+}
+
+function favouritesMenu(){
+    // Delete anything previously rendered
+
+    favouriteColumn0.empty();
+    favouriteColumn1.empty();
+    favouriteColumn2.empty();
+
+
+    // Hide other divs and show favourites
+    recipeContainer.addClass("hide");
+    landingContainer.addClass("hide");
+    favouritesContainer.removeClass("hide");
+    $("#prevBtn").removeClass("hide");
+    $("#favouritesBtn").addClass("hide");
+
+     // Retrieve all items from local storage and place into arrays
+     var keys = Object.keys(localStorage);
+     var values = Object.values(localStorage);
+     // Remove any elements in the arrays that are not saved recipes    
+     for (i in keys){
+         if(keys[i].startsWith("recipeID_")){}
+         else
+         {keys.splice(i,1);
+          values.splice(i,1);           
+         }
+     }    
+
+     // Parse recipes and place into an array
+     var allRecipes = []
+     values.forEach(element => {
+        allRecipes.push(JSON.parse(element))
+     });
+
+     x = 0
+
+
+
+    allRecipes.forEach(element => {
+        if(x === 3){x = 0}
+        switch(x) {
+            case 0:
+            recipeCardRenderWithButtons(element,favouriteColumn0)
+              break;
+            case 1:
+            recipeCardRenderWithButtons(element,favouriteColumn1)
+              break;
+            case 2:
+            recipeCardRenderWithButtons(element,favouriteColumn2)
+        }
+        x++
+
+
+     });
+
+}
+
+
+
 
 retrievePreviousRecipes();
 

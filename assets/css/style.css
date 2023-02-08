@@ -61,9 +61,10 @@
     height: 200px;
 }
 
-.card:hover{ 
-    transform: scale(1.05);
+
+.landingCard:hover{
     cursor: pointer;
+    transform: scale(1.05);
 }
 
 #searchHeader, #randomHeader, #recipeHeader, #recipeInstHeader, #recipeIngredHeader {
