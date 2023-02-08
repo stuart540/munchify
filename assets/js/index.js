@@ -64,6 +64,7 @@ function getRecipes(cuisine){
 
 
 function recipeRender(recipe){
+    $("#favouritesBtn").removeClass("hide");
     recipeContainer.removeClass("hide");
     landingContainer.addClass("hide");
     favouritesContainer.addClass("hide");
@@ -166,6 +167,7 @@ $("#favouritesBtn").on("click",function(){
     recipeContainer.addClass("hide");
     landingContainer.addClass("hide");
     favouritesContainer.removeClass("hide");
+    $("#favouritesBtn").addClass("hide");
     favouritesMenu();
 
 })
