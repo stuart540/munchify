@@ -91,9 +91,12 @@ function recipeRender(recipe){
      // Update image to recipe image
      recipeImg.attr("src",recipe.recipeImageURL);
 
+     // When click on confirm button on modal
      $("#confirmLink").on("click",function(){
 
+        // Open recipe in new window
         window.open(recipe.recipeURL,"_blank");
+        $("#exampleModal").modal('hide');
 
      })
 
