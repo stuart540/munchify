@@ -63,6 +63,7 @@ function getRecipes(cuisine){
 
 
 function recipeRender(recipe){
+    getSpotifyPlaylist(recipe.recipeCuisine);
     recipeContainer.removeClass("hide");
     landingContainer.addClass("hide");
     favouritesContainer.addClass("hide");
