@@ -1,6 +1,11 @@
 $(document).ready(function(){
 
-
+var cuisineList = [
+    'italian',
+    'indian',
+    'chinese',
+    'mexican'
+]
 
 var recipeContainer = $("#recipeContainer");
 var landingContainer = $("#landingContainer");
@@ -28,7 +33,11 @@ var recipeInstruct = $("#recipeInst");
 var playlistImg = $("playlistPhoto")
 
 
-function getRecipes(cuisine){
+function getRecipes(cuisine = ""){
+    if (cuisine === ""){
+        pick = Math.floor(Math.random() * 3) + 0;  // random integer, from 0 to 3
+        cuisine = cuisineList[pick]
+    }
     var queryURL = "https://api.spoonacular.com/recipes/random?apiKey=f14cec32cf4e47acbb3dd6e49f5de686&number=1&tags=dinner,"+cuisine
     $.ajax({
     url: queryURL,
@@ -40,7 +49,7 @@ function getRecipes(cuisine){
             ingredients.push(element.original);    
 
         });
-        console.log(response)
+
         var fullRecipe = {
             recipeName : response.recipes[0].title,
             recipeIngredients : ingredients,
@@ -48,7 +57,7 @@ function getRecipes(cuisine){
             recipeInstructions : response.recipes[0].instructions,
             recipeURL : response.recipes[0].sourceUrl,
             recipeID : response.recipes[0].id,
-            recipeCuisine : response.recipes[0].cuisines[0]
+            recipeCuisine : cuisine
         }
 
         // Add fullRecipe to the tempRecipes array where we hold the recipes we're dealing with in this session
@@ -92,10 +101,12 @@ function recipeRender(recipe){
      recipeImg.attr("src",recipe.recipeImageURL);
 
      // When click on confirm button on modal
+     $("#confirmLink").unbind()
      $("#confirmLink").on("click",function(){
 
         // Open recipe in new window
         window.open(recipe.recipeURL,"_blank");
+        console.log(recipe.recipeURL)
         $("#exampleModal").modal('hide');
 
      })
@@ -137,23 +148,28 @@ function recipeRender(recipe){
          unorderList.append(ingredientEl);
      }
 
-     console.log(unorderList);
+     spotifyPlaylister(recipe.recipeCuisine)
      // Append unordered list to recipe ingredient
      recipeIngred.append(unorderList.innerHTML);
      // Adjust Playlist Image position
      playlistImg.attr("class","mx-auto")
-     getSpotifyPlaylist(recipe.recipeCuisine);
+     $("#favouritesBtn").removeClass("hide");
+     recipeContainer.removeClass("hide");
+     landingContainer.addClass("hide");
+     favouritesContainer.addClass("hide");
+     $("#prevBtn").removeClass("hide");
+    
 
 }
 
 
 
 // Function to hide 
-var displayData = function (cuisine) {
+var displayData = function () {
     recipeContainer.removeClass("hide");
     landingContainer.addClass("hide");
     $("#prevBtn").removeClass("hide");
-    getRecipes(cuisine);
+    getRecipes();
 }
 
 randomiseButton.on("click",displayData);
@@ -181,29 +197,34 @@ submitButton.on("click",function(){
     var chosenCuisine = $("#selectForm").val();
     // Load the photo 
     getRecipes(chosenCuisine);
+    displayData();
     $("#prevBtn").removeClass("hide");
 
+})
 
+function spotifyPlaylister(cuisine){
+    console.log("playlister"+cuisine)
     var playlistLink = $("#playlistLink");
     var playlistPhoto = $("#playlistPhoto");
 
-    console.log($("#selectForm").val());
-    if ($("#selectForm").val() == "italian"){
+  
+    if (cuisine == "italian"){
         playlistLink.attr("href","https://open.spotify.com/playlist/3WPuV7Q2Uy8nUthfZywVFa?si=6ff16e4158a84378");
-        playlistPhoto.attr("src","")
-    } else if ($("#selectForm").val() == "chinese"){
+        
+    } else if (cuisine == "chinese"){
         playlistLink.attr("href","https://open.spotify.com/playlist/1YXWb6ZdubdLsVhPXHhDe8?si=16ca5b20fbe84a69");
-    } else if ($("#selectForm").val() == "indian"){
+        
+    } else if (cuisine == "indian"){
         playlistLink.attr("href","https://open.spotify.com/playlist/4ELZQYKtNjZSkyjad1gebK?si=3bab4750bdfd472c");
-    } else if ($("#selectForm").val() == "mexican"){
+    } else if (cuisine == "mexican"){
         playlistLink.attr("href","https://open.spotify.com/playlist/1PqA4nsu8oljHTwWgR0oSx?si=4554f95bbcb3482f");
     } 
-})
+
+}
 
 
-$("#randomiseButton").on("click",function(){
-    $("#playlistPhoto").attr("href","https://open.spotify.com/playlist/68RSXU9KxaxjYAlQjhw5PF?si=dec5836914d54bc2");
-})
+
+
 
 currentRecipeFavouriteButton.on('click', function () {
       favouriteRecipe(currentRecipeFavouriteButton)
@@ -228,7 +249,7 @@ if(htmlevent.attr("data-saved") === "false")
       var savingRecipe = tempRecipes.find(obj => {
         return obj.recipeID === parseInt(htmlevent.attr("data-ID"))
       })
-      console.log(savingRecipe)
+      
       var savingRecipeJSON = JSON.stringify(savingRecipe);
     // Add "recipeID_" to the start of each key so if we store anything else in local storage we can seperate out recipes
       localStorage.setItem(("recipeID_"+savingRecipe.recipeID), savingRecipeJSON);
@@ -327,14 +348,19 @@ function retrievePreviousRecipes(){
 }
 
 // Function for picking n unique random numbers out of a list up to a max number
-function generateRandomNumbers(n,max){
+function generateRandomNumbers(n,max,min = 0){
+    let numberList = [];
     let uniqueNumbers = [];
-    while (uniqueNumbers.length < n) {
-      let randomNumber = Math.floor((Math.random() * max) + 0);
-      if (!uniqueNumbers.includes(randomNumber)) {
-        uniqueNumbers.push(randomNumber);
-      }
+    for (i = min; i < max; i++){
+        numberList.push(i)
     }
+
+    while (uniqueNumbers.length < n) {
+      let randomNumber = Math.floor((Math.random() * numberList.length) + min);
+        uniqueNumbers.push(numberList[randomNumber])
+        numberList.splice(randomNumber,1)
+      }
+    
     return uniqueNumbers;
     }
 
@@ -379,7 +405,7 @@ function recipeCardRender(recipe,htmlEl){
          {
             var recipe = JSON.parse(localStorage.getItem("recipeID_"+recipeID))
          }
-         console.log(recipe)
+         
         recipeRender(recipe)
       });
 
@@ -436,7 +462,7 @@ function recipeCardRenderWithButtons(recipe,htmlEl){
          {
             var recipe = JSON.parse(localStorage.getItem("recipeID_"+recipeID))
          }
-         console.log(recipe)
+         
         recipeRender(recipe)
       });
 
