@@ -185,12 +185,24 @@ submitButton.on("click",function(){
 
 
     var playlistLink = $("#playlistLink");
+    var playlistPhoto = $("#playlistPhoto");
+
     console.log($("#selectForm").val());
     if ($("#selectForm").val() == "italian"){
         playlistLink.attr("href","https://open.spotify.com/playlist/3WPuV7Q2Uy8nUthfZywVFa?si=6ff16e4158a84378");
+        playlistPhoto.attr("src","")
     } else if ($("#selectForm").val() == "chinese"){
-        playlistLink.attr("href","")
-    }
+        playlistLink.attr("href","https://open.spotify.com/playlist/1YXWb6ZdubdLsVhPXHhDe8?si=16ca5b20fbe84a69");
+    } else if ($("#selectForm").val() == "indian"){
+        playlistLink.attr("href","https://open.spotify.com/playlist/4ELZQYKtNjZSkyjad1gebK?si=3bab4750bdfd472c");
+    } else if ($("#selectForm").val() == "mexican"){
+        playlistLink.attr("href","https://open.spotify.com/playlist/1PqA4nsu8oljHTwWgR0oSx?si=4554f95bbcb3482f");
+    } 
+})
+
+
+$("#randomiseButton").on("click",function(){
+    $("#playlistPhoto").attr("href","https://open.spotify.com/playlist/68RSXU9KxaxjYAlQjhw5PF?si=dec5836914d54bc2");
 })
 
 currentRecipeFavouriteButton.on('click', function () {
