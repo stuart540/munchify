@@ -37,6 +37,12 @@
     padding-bottom: 15px;
 }
 
+#playlistCont{
+    display: grid;
+    align-items: center;
+    justify-content: center;
+}
+
 .row{
     padding-bottom: 15px;
 }

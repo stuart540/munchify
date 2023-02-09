@@ -182,6 +182,15 @@ submitButton.on("click",function(){
     // Load the photo 
     getRecipes(chosenCuisine);
     $("#prevBtn").removeClass("hide");
+
+
+    var playlistLink = $("#playlistLink");
+    console.log($("#selectForm").val());
+    if ($("#selectForm").val() == "italian"){
+        playlistLink.attr("href","https://open.spotify.com/playlist/3WPuV7Q2Uy8nUthfZywVFa?si=6ff16e4158a84378");
+    } else if ($("#selectForm").val() == "chinese"){
+        playlistLink.attr("href","")
+    }
 })
 
 currentRecipeFavouriteButton.on('click', function () {
@@ -483,9 +492,15 @@ function favouritesMenu(){
 }
 
 
+// Load playlist link + image
+
+
 
 
 retrievePreviousRecipes();
+
+
+
 
 });
 
