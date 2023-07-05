@@ -45,7 +45,6 @@
 
 
 #spotLogo{
-
     height: 250px;
     width: 200px;
 }
@@ -68,7 +67,7 @@
 }
 
 #munchify_logo{
-    display: block;
+    /* display: block; */
     max-width: 80vw;
     width: auto;
     height: auto;
@@ -77,7 +76,7 @@
 #hero_banner{
     display: block;
     width: 100vw;
-    height: auto;
+    height: 70vh;
 }
 
 
