@@ -67,8 +67,9 @@
 }
 
 #munchify_logo{
-    /* display: block; */
-    max-width: 80vw;
+    display: block;
+    max-width: 40vw;
+    max-height: 8vh;
     width: auto;
     height: auto;
 }
