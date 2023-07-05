@@ -61,6 +61,41 @@ function getRecipes(cuisine){
     });
 }
 
+function getSpotifyPlaylist(cuisine){
+    var queryURL = `/api/playlist/${cuisine}`
+    $.ajax({
+    url: queryURL,
+    method: "GET"
+  })
+    .then(console.log(data))
+    
+    // (function(response) {
+    //     var ingredients = [];
+    //     response.recipes[0].extendedIngredients.forEach(element => {
+    //         ingredients.push(element.original);    
+
+    //     });
+    //     console.log(response)
+    //     var fullRecipe = {
+    //         recipeName : response.recipes[0].title,
+    //         recipeIngredients : ingredients,
+    //         recipeImageURL : response.recipes[0].image,
+    //         recipeInstructions : response.recipes[0].instructions,
+    //         recipeURL : response.recipes[0].sourceUrl,
+    //         recipeID : response.recipes[0].id,
+    //         recipeCuisine : response.recipes[0].cuisines[0]
+    //     }
+
+    //     // Add fullRecipe to the tempRecipes array where we hold the recipes we're dealing with in this session
+    //     tempRecipes.push(fullRecipe);
+
+    //     // Send to render function
+    //     recipeRender(fullRecipe);      
+
+
+    // });
+}
+
 
 
 function recipeRender(recipe){
@@ -142,7 +177,7 @@ function recipeRender(recipe){
      recipeIngred.append(unorderList.innerHTML);
      // Adjust Playlist Image position
      playlistImg.attr("class","mx-auto")
-     getSpotifyPlaylist(recipe.recipeCuisine);
+    //  getSpotifyPlaylist(recipe.recipeCuisine);
 
 }
 
@@ -181,6 +216,7 @@ submitButton.on("click",function(){
     var chosenCuisine = $("#selectForm").val();
     // Load the photo 
     getRecipes(chosenCuisine);
+    getSpotifyPlaylist(chosenCuisine)
     $("#prevBtn").removeClass("hide");
 
 

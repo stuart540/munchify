@@ -20,6 +20,7 @@ app.get('/', (req, res) => {
   app.get('/api/playlist/:query', (req, res) => {
     // res.json(getPlaylist('italian'));
     getPlaylist(req.params.query).then(data => res.json(data)).catch((err) => res.status(500).json(err));
+    // console.log(res.json(data));
     // res.json(getAudioFeatures_Track('07A0whlnYwfWfLQy4qh3Tq'))
   });
 
