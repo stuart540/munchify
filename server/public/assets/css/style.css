@@ -74,6 +74,12 @@
     height: auto;
 }
 
+#hero_banner{
+    display: block;
+    width: 100vw;
+    height: auto;
+}
+
 
 .landingCard:hover{
     cursor: pointer;
@@ -90,8 +96,8 @@
 }
 
 #playlistPhoto{
-    height: 450px;
-    width: 550px;
+    height: auto;
+    width: auto;
 }
 
 
