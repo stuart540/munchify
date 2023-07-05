@@ -9,7 +9,7 @@
     display: grid;
     place-items: center;
     justify-content: center;
-    background-color: #b9fbc0;
+    background-color: #e79215;
     padding-top: 0;
     padding-bottom: 0;
 }
@@ -17,17 +17,17 @@
 #jumbo1 {
     font-family: "Oswald";
     font-size: 30px;
-    color: #74c69d;
+    color: #e79215;
 }
 
 #jumbo2 {
     font-family: "Quattrocento";
     font-size: 20px;
-    color: #95d5b2;
+    color: #e79215;
 }
 
 #randomiseButton{
-    background-color: #b9fbc0;
+    background-color: #e79215;
 }
 
 .col{
@@ -45,7 +45,6 @@
 
 
 #spotLogo{
-
     height: 250px;
     width: 200px;
 }
@@ -58,7 +57,7 @@
 }
 
 #selectForm{
-    background-color: #b9fbc0;
+    background-color: #e79215;
 }
 
 #headerRow{
@@ -68,7 +67,16 @@
 }
 
 #munchify_logo{
-    height: 200px;
+    /* display: block; */
+    max-width: 80vw;
+    width: auto;
+    height: auto;
+}
+
+#hero_banner{
+    display: block;
+    width: 100vw;
+    height: 70vh;
 }
 
 
@@ -78,7 +86,7 @@
 }
 
 #searchHeader, #randomHeader, #recipeHeader, #recipeInstHeader, #recipeIngredHeader {
-    color: #b9fbc0;
+    color: #e79215;
     font-family: Raleway;
 }
 
@@ -87,8 +95,8 @@
 }
 
 #playlistPhoto{
-    height: 450px;
-    width: 550px;
+    height: auto;
+    width: auto;
 }
 
 

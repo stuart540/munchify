@@ -38,6 +38,7 @@ const getAudioFeatures_Track = async (track_id) => {
                 'Authorization': `Bearer ${access_token}`
             }
         });
+        console.log('hello');
         console.log(response.data);
         return response.data;
     } catch (error) {
